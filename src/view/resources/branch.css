@@ -1,0 +1,81 @@
+a {  color: #007EA8;  }
+
+.configuration-outer-shell {
+    width: 520px;
+    height: 275px;
+    margin: 5% auto;
+    box-shadow: 0 2px 14px 0 rgba(0,0,0,0.22);
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding: 25px;
+}
+.branch-icon {
+    height: 39px;
+    width: 106px;
+    margin:auto;
+    background-image: url("branch_logo_dk.svg");
+    background-repeat: no-repeat;
+    padding-bottom: 50px;
+}
+.branch-form {
+    padding-left: 20px;
+    font-family: 'Source Sans Pro Regular', sans-serif;
+    background-color: #FFFFFF;
+}
+label {
+    display:block;
+    font-size: 16px;
+    padding-bottom: 8px;
+    color: #06122F;
+    font-family: 'Source Sans Pro Semi-Bold', sans-serif;
+}
+input[type=text] {
+    width:490px;
+    height: 40px;
+    padding-left: 22px;
+    font-size: 17px;
+    border: 1px #B5C0CD solid;
+    border-radius: 2.3px;
+    background: #F9FAFB;
+}
+.error {
+    margin-top: 0px;
+    font-size: 13px;
+    color: #E37978;
+    margin-top: 6px;
+}
+
+.error:before {
+    width: 20px;
+    height: 20px;
+    display: block;
+    content: "";
+    background: url("error.svg") no-repeat;
+    float: left;
+}
+
+.footer {
+    margin-top: 29px;
+    height: 75px;
+    position: relative;
+}
+
+.footer-text {
+    position: absolute;
+    margin: 0px 0px 0px 6px;
+    font-size: 13px;
+    color: #748292;
+    top: 45px;
+}
+
+.gear-graphic {
+    background: url("gear.svg") no-repeat;
+    width: 100px;
+    height: 100px;
+    float: right;
+}
+
+#branch-key-error {
+    visibility: hidden;
+}
+

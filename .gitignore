@@ -1,0 +1,10 @@
+node_modules/**
+.DS_Store
+.DS_Store?
+.gitignore-e
+config.json
+Key.pem
+npm-debug.log
+*.log
+.idea
+package-lock.json

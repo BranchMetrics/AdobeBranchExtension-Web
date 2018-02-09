@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>Branch Extension Configuration</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../resources/branch.css">
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function branchKeyIsValid(branchKey, validateFunction) {
+	    const key = branchKey.trim();
+	    const length = key.length;
+
+	    if (length === 0 && !validateFunction) {
+	    	return true;
+        }
+
+	    return (length === 41
+	    && (key.includes("key_live") ||
+        key.includes("key_test"))) ? true : false;
+    }
+
+	function validateField(elementId) {
+	    const element = document.getElementById(elementId);
+		if (elementId === "branch-key") {
+		  let branchKeyError = document.getElementById("branch-key-error");
+		  branchKeyIsValid(element.value) ? branchKeyError.style.visibility = "hidden" : branchKeyError.style.visibility = "visible";
+		}
+	}
+</script>
+<div class="configuration-outer-shell">
+    <div>
+        <div class="branch-icon"></div>
+        <form class="branch-form">
+            <label for="branch-key">Enter your <a
+                    href="https://dashboard.branch.io/account-settings/app"
+                    target="_blank">Branch Key</a>:
+            </label>
+            <input type="text"
+                   id="branch-key"
+                   name="branchKey"
+                   maxlength="41"
+                   spellcheck="false"
+                   onblur="validateField('branch-key')"
+                   onfocus="validateField('branch-key')"
+                   onkeyup="validateField('branch-key')"
+                   oninput="validateField('branch-key')"
+                   required/>
+            <p id="branch-key-error" class="error">Incorrect Branch Key: Please copy your Branch Key from <a href="https://dashboard.branch.io/account-settings/app" target="_blank">here</a></p>
+        </form>
+        <div class="footer">
+            <span class="footer-text">Questions? We are here to <a href="https://support.branch.io/support/tickets/new" target="_blank">help</a></span>
+            <div class="gear-graphic"></div>
+        </div>
+    </div>
+</div>
+<script>
+	window.extensionBridge.register({
+		init: function(info) {
+			if (info.settings) {
+			    document.getElementById("branch-key").value = info.settings.branchkey || '';
+			}
+		},
+		getSettings: function() {
+			return {
+				branchkey: document.getElementById("branch-key").value || ''
+			}
+		},
+		validate: function() {
+			return branchKeyIsValid(document.getElementById("branch-key").value,
+                  true);
+		}
+	});
+</script>
+</body>
