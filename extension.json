@@ -37,6 +37,29 @@
         "type": "object",
         "properties": {}
       }
+    },
+    {
+      "displayName": "Auto Open Your App",
+      "name": "autoopenapp",
+      "libPath": "src/lib/actions/autoOpenApp.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/autoOpenApp.html"
+    }
+  ],
+  "events": [
+    {
+      "displayName": "Dom Ready",
+      "name": "domready",
+      "libPath": "src/lib/events/domReady.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      }
     }
   ]
 }

@@ -39,6 +39,7 @@
             <input type="text"
                    id="branch-key"
                    name="branchKey"
+                   class="branch-form-input"
                    maxlength="41"
                    spellcheck="false"
                    onblur="validateField('branch-key')"
@@ -58,12 +59,12 @@
 	window.extensionBridge.register({
 		init: function(info) {
 			if (info.settings) {
-			    document.getElementById("branch-key").value = info.settings.branchkey || '';
+			    document.getElementById("branch-key").value = info.settings.branchKey || '';
 			}
 		},
 		getSettings: function() {
 			return {
-				branchkey: document.getElementById("branch-key").value || ''
+				branchKey: document.getElementById("branch-key").value || ''
 			}
 		},
 		validate: function() {

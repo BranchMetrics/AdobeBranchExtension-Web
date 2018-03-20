@@ -9,6 +9,7 @@ a {  color: #007EA8;  }
     background-color: #FFFFFF;
     padding: 25px;
 }
+
 .branch-icon {
     height: 39px;
     width: 106px;
@@ -17,11 +18,13 @@ a {  color: #007EA8;  }
     background-repeat: no-repeat;
     padding-bottom: 50px;
 }
+
 .branch-form {
     padding-left: 20px;
     font-family: 'Source Sans Pro Regular', sans-serif;
     background-color: #FFFFFF;
 }
+
 label {
     display:block;
     font-size: 16px;
@@ -29,7 +32,8 @@ label {
     color: #06122F;
     font-family: 'Source Sans Pro Semi-Bold', sans-serif;
 }
-input[type=text] {
+
+.branch-form-input {
     width:490px;
     height: 40px;
     padding-left: 22px;
@@ -37,7 +41,9 @@ input[type=text] {
     border: 1px #B5C0CD solid;
     border-radius: 2.3px;
     background: #F9FAFB;
+    margin-bottom: 10px;
 }
+
 .error {
     margin-top: 0px;
     font-size: 13px;

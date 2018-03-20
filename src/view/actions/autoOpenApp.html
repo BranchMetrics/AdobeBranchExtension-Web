@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title>Auto Open Your App</title>
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../resources/branch.css">
+    <link rel="stylesheet" type="text/css" href="../resources/autoOpenApp.css">
+    <script src="../resources/autoOpenAppViewHelper.js"></script>
+</head>
+<body>
+<div class="auto-open-outer-shell">
+    <div>
+        <div class="branch-icon"></div>
+        <div class="branch-form">
+            <label for="channel">Channel:</label>
+            <input type="text"
+                   id="channel"
+                   spellcheck="false"
+                   class="branch-form-input"
+                   />
+            <label for="campaign">Campaign:</label>
+            <input type="text"
+                   id="campaign"
+                   spellcheck="false"
+                   class="branch-form-input"
+                   />
+            <label for="tags">Tags:</label>
+            <input type="text"
+                   id="tags"
+                   spellcheck="false"
+                   class="branch-form-input"
+                   />
+            <div id="link-data">
+                <div class="link-data-rows">
+                    Deep Link Data:
+                    <div class="link-data-rows-hook"></div>
+                </div>
+                <div class="add-more-data">
+                    <button class="add-more-data-button" onclick="autoOpen.addRow();">+ More Data</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <span class="footer-text">Questions? We are here to <a href="https://support.branch.io/support/tickets/new" target="_blank">help</a></span>
+            <div class="gear-graphic"></div>
+        </div>
+    </div>
+</div>
+<script>
+	window.extensionBridge.register({
+		init: function(info) {
+			if (info.settings && info.settings.autoOpenLink) {
+                autoOpen.restoreData(info.settings.autoOpenLink);
+			}
+		},
+		getSettings: function() {
+			return {
+			    autoOpenLink: autoOpen.getData()
+			}
+		},
+		validate: function() {
+			return autoOpen.isLinkDataValidJSON(autoOpen.getData());
+        }
+    });
+</script>
+</body>
+</html>
