@@ -41,13 +41,13 @@
     {
       "displayName": "Auto Open Your App",
       "name": "autoopenapp",
-      "libPath": "src/lib/actions/autoOpenApp.js",
+      "libPath": "src/lib/actions/autoOpen.js",
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
         "properties": {}
       },
-      "viewPath": "actions/autoOpenApp.html"
+      "viewPath": "actions/autoOpen.html"
     }
   ],
   "events": [

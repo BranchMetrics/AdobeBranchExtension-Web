@@ -23,7 +23,7 @@ module.exports = {
 			],
 			actions: [
 				{
-					modulePath: 'branch-mobile-growth/src/lib/actions/autoOpenApp.js',
+					modulePath: 'branch-mobile-growth/src/lib/actions/autoOpen.js',
 					settings: {
 						"autoOpenLink": {
 							"tags": [

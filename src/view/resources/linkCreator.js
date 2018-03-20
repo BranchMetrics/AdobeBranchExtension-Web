@@ -1,36 +1,37 @@
-var autoOpen = {}
+var linkCreator = {}
 
-autoOpen.eventRowIndex = 0;
+linkCreator.eventRowIndex = 0;
 
-autoOpen.addRow = function (key, value) {
+linkCreator.addRow = function (key, value) {
 	let row = document.createElement("div");
 	row.className = "link-data-row";
-	row.id = "link-data-row-" + autoOpen.eventRowIndex++;
-	autoOpen.append(row, autoOpen.getTextField(row.id, 'key', key));
-	autoOpen.append(row, autoOpen.getSemiColon(row.id));
-	autoOpen.append(row, autoOpen.getTextField(row.id, 'value', value));
-	autoOpen.append(row, autoOpen.getDeleteRowLink(row.id))
-	autoOpen.append(document.getElementsByClassName("link-data-rows-hook")[0], row);
+	row.id = "link-data-row-" + linkCreator.eventRowIndex++;
+	linkCreator.append(row, linkCreator.getTextField(row.id, 'key', key));
+	linkCreator.append(row, linkCreator.getSemiColon(row.id));
+	linkCreator.append(row, linkCreator.getTextField(row.id, 'value', value));
+	linkCreator.append(row, linkCreator.getDeleteRowLink(row.id))
+	linkCreator.append(document.getElementsByClassName("link-data-rows-hook")[0], row);
 }
 
-autoOpen.append = function(element, child) {
+linkCreator.append = function(element, child) {
 	element && child ? element.appendChild(child) : '';
 }
 
-autoOpen.getElementId = function(id) {
+linkCreator.getElementId = function(id) {
 	return id ? document.getElementById(id) : '';
 }
 
-autoOpen.getTextField = function (rowId, propertyType, textFieldValue) {
+linkCreator.getTextField = function (rowId, propertyType, textFieldValue) {
 	let input = document.createElement("input");
 	input.type = "text";
 	input.id = rowId + "-" + propertyType;
 	input.className = "link-data-input";
 	input.value = !textFieldValue ? '' : textFieldValue ;
+	input.placeholder = propertyType === 'key' ? "key" : "value";
 	return input;
 }
 
-autoOpen.getSemiColon = function(id) {
+linkCreator.getSemiColon = function(id) {
 	let span = document.createElement("span");
 	span.innerHTML = ":";
 	span.className = "link-data-semi-colon-span";
@@ -38,31 +39,29 @@ autoOpen.getSemiColon = function(id) {
 	return span;
 }
 
-autoOpen.getDeleteRowLink = function(id) {
+linkCreator.getDeleteRowLink = function(id) {
 	let anchor = document.createElement("a");
 	anchor.className = "link-data-delete";
 	anchor.id = id + "-anchor";
 	anchor.href = "#";
 	anchor.innerHTML = '<i class="material-icons link-data-delete-icon">remove_circle</i>';
 	anchor.onclick = function() {
-		autoOpen.removeRow(anchor.id);
+		linkCreator.removeRow(anchor.id);
 	};
 	return anchor;
 }
 
-autoOpen.removeRow = function(id) {
-	const child = autoOpen.getElementId(id.replace("-anchor", ""));
+linkCreator.removeRow = function(id) {
+	const child = linkCreator.getElementId(id.replace("-anchor", ""));
 	const parent = child.parentNode;
 	parent.removeChild(child);
 }
 
-autoOpen.getData = function() {
-	const channel = autoOpen.getElementId("channel").value;
-	const campaign = autoOpen.getElementId("campaign").value;
-	console.log(channel);
-	console.log(campaign);
+linkCreator.getData = function() {
+	const channel = linkCreator.getElementId("channel").value;
+	const campaign = linkCreator.getElementId("campaign").value;
 
-	let tags = autoOpen.getElementId("tags").value.replace(/\s/g, '');
+	let tags = linkCreator.getElementId("tags").value.replace(/\s/g, '');
 	tags = tags ? tags.split(",") : [];
 
 	let link = {};
@@ -84,22 +83,22 @@ autoOpen.getData = function() {
 	return link;
 }
 
-autoOpen.restoreData = function(linkData) {
+linkCreator.restoreData = function(linkData) {
 	if (!linkData) {
 		return;
 	}
-	autoOpen.eventRowIndex = 0;
+	linkCreator.eventRowIndex = 0;
 	document.getElementsByClassName("link-data-rows-hook")[0].innerHTML = '';
-	autoOpen.getElementId("channel").value = linkData.channel || '';
-	autoOpen.getElementId("campaign").value = linkData.campaign || '';
-	autoOpen.getElementId("tags").value = linkData.tags || '';
+	linkCreator.getElementId("channel").value = linkData.channel || '';
+	linkCreator.getElementId("campaign").value = linkData.campaign || '';
+	linkCreator.getElementId("tags").value = linkData.tags || '';
 
 	for (var key in linkData.data) {
-		autoOpen.addRow(key, linkData.data[key]);
+		linkCreator.addRow(key, linkData.data[key]);
 	}
 }
 
-autoOpen.isLinkDataValidJSON = function(linkData) {
+linkCreator.isLinkDataValidJSON = function(linkData) {
 	const stringifiedLinkData = JSON.stringify(linkData);
 	try {
 		JSON.parse(stringifiedLinkData);
