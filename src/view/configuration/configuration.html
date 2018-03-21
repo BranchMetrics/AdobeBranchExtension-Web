@@ -8,8 +8,8 @@
 <body>
 <script type="text/javascript">
     function branchKeyIsValid(branchKey, validateFunction) {
-	    const key = branchKey.trim();
-	    const length = key.length;
+	    var key = branchKey.trim();
+	    var length = key.length;
 
 	    if (length === 0 && !validateFunction) {
 	    	return true;
@@ -21,9 +21,9 @@
     }
 
 	function validateField(elementId) {
-	    const element = document.getElementById(elementId);
+	    var element = document.getElementById(elementId);
 		if (elementId === "branch-key") {
-		  let branchKeyError = document.getElementById("branch-key-error");
+		  var branchKeyError = document.getElementById("branch-key-error");
 		  branchKeyIsValid(element.value) ? branchKeyError.style.visibility = "hidden" : branchKeyError.style.visibility = "visible";
 		}
 	}

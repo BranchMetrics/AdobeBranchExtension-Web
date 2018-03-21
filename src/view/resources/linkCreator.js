@@ -3,7 +3,7 @@ var linkCreator = {}
 linkCreator.eventRowIndex = 0;
 
 linkCreator.addRow = function (key, value) {
-	let row = document.createElement("div");
+	var row = document.createElement("div");
 	row.className = "link-data-row";
 	row.id = "link-data-row-" + linkCreator.eventRowIndex++;
 	linkCreator.append(row, linkCreator.getTextField(row.id, 'key', key));
@@ -22,7 +22,7 @@ linkCreator.getElementId = function(id) {
 }
 
 linkCreator.getTextField = function (rowId, propertyType, textFieldValue) {
-	let input = document.createElement("input");
+	var input = document.createElement("input");
 	input.type = "text";
 	input.id = rowId + "-" + propertyType;
 	input.className = "link-data-input";
@@ -32,7 +32,7 @@ linkCreator.getTextField = function (rowId, propertyType, textFieldValue) {
 }
 
 linkCreator.getSemiColon = function(id) {
-	let span = document.createElement("span");
+	var span = document.createElement("span");
 	span.innerHTML = ":";
 	span.className = "link-data-semi-colon-span";
 	span.id = id + "-semi-colon";
@@ -40,7 +40,7 @@ linkCreator.getSemiColon = function(id) {
 }
 
 linkCreator.getDeleteRowLink = function(id) {
-	let anchor = document.createElement("a");
+	var anchor = document.createElement("a");
 	anchor.className = "link-data-delete";
 	anchor.id = id + "-anchor";
 	anchor.href = "#";
@@ -52,29 +52,29 @@ linkCreator.getDeleteRowLink = function(id) {
 }
 
 linkCreator.removeRow = function(id) {
-	const child = linkCreator.getElementId(id.replace("-anchor", ""));
-	const parent = child.parentNode;
+	var child = linkCreator.getElementId(id.replace("-anchor", ""));
+	var parent = child.parentNode;
 	parent.removeChild(child);
 }
 
 linkCreator.getData = function() {
-	const channel = linkCreator.getElementId("channel").value;
-	const campaign = linkCreator.getElementId("campaign").value;
+	var channel = linkCreator.getElementId("channel").value;
+	var campaign = linkCreator.getElementId("campaign").value;
 
-	let tags = linkCreator.getElementId("tags").value.replace(/\s/g, '');
+	var tags = linkCreator.getElementId("tags").value.replace(/\s/g, '');
 	tags = tags ? tags.split(",") : [];
 
-	let link = {};
+	var link = {};
 	link.tags = tags;
 	link.channel = channel || '';
 	link.campaign = campaign || '';
 	link.data = {};
-	let formLinkData = document.querySelectorAll(".link-data-row");
+	var formLinkData = document.querySelectorAll(".link-data-row");
 	if (formLinkData.length > 0) {
 		for (var index = 0; index < formLinkData.length; index++) {
 			var children = formLinkData[index].childNodes;
-			const key = children[0].value;
-			const val = children[2].value;
+			var key = children[0].value;
+			var val = children[2].value;
 			if (key && val) {
 				link.data[children[0].value] = children[2].value;
 			}
@@ -99,7 +99,7 @@ linkCreator.restoreData = function(linkData) {
 }
 
 linkCreator.isLinkDataValidJSON = function(linkData) {
-	const stringifiedLinkData = JSON.stringify(linkData);
+	var stringifiedLinkData = JSON.stringify(linkData);
 	try {
 		JSON.parse(stringifiedLinkData);
 		return true;

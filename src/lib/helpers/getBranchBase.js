@@ -1,7 +1,7 @@
 'use strict';
-let branchBase;
-let window = require('@adobe/reactor-window');
-const loadScript = require('@adobe/reactor-load-script');
+var branchBase;
+var window = require('@adobe/reactor-window');
+var loadScript = require('@adobe/reactor-load-script');
 
 (function(root, doc, scriptStr, branchStr, createCallback, branchSdk, funcs, i) {
 	if (!root[branchStr] || !root[branchStr]._q) {
