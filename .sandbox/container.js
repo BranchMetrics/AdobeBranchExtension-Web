@@ -33,13 +33,14 @@ module.exports = {
 								"d",
 								"e"
 							],
-							"channel": "Test Channel",
-							"campaign": "Test Campaign",
 							"data": {
 								"key1": "val1",
 								"key2": "val2",
 								"key3": "val3"
 							}
+						},
+						"autoOpenOptions": {
+							"make_new_link": true
 						}
 					}
 				}

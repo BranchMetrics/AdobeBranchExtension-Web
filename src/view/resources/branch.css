@@ -85,3 +85,20 @@ label {
     visibility: hidden;
 }
 
+.branch-form-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 10px 10px 10px 0;
+    font-family: Source Sans Pro,sans-serif;
+}
+
+.branch-form-description {
+    margin: 6px 0 20px 0;
+    font-size: 15px;
+    font-family: Source Sans Pro,sans-serif;
+    font-weight: 300;
+    color: #3b3e49;
+}
+
+
+

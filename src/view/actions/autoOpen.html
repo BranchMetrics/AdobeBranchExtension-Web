@@ -10,21 +10,32 @@
 <div class="link-creator-outer-shell">
         <div class="branch-icon"></div>
         <div class="branch-form">
-            <label for="channel">Channel:</label>
+            <div class="branch-form-title">Automatically Launch and Deep Link Users To Content in Your App</div>
+            <div class="branch-form-description">
+                Define <a href="https://docs.branch.io/pages/links/integrate/" target="_blank">the data</a> that you would like to receive once your app is automatically launched on a user's device.
+            </div>
+            Options
+            <div class="link-creator-options">
+                <label class="link-creator-option-label">
+                    <input type="checkbox" name="checkbox" id="makeNewLink">
+                    Force creation of a new link even if one already exists
+                </label>
+            </div>
+            <label for="channel">Channel</label>
             <input type="text"
                    id="channel"
                    spellcheck="false"
                    class="branch-form-input"
                    placeholder="eg. Facebook"
                    />
-            <label for="campaign">Campaign:</label>
+            <label for="campaign">Campaign</label>
             <input type="text"
                    id="campaign"
                    spellcheck="false"
                    class="branch-form-input"
                    placeholder="eg. Weekly Deals"
                    />
-            <label for="tags">Tags:</label>
+            <label for="tags">Tags</label>
             <input type="text"
                    id="tags"
                    spellcheck="false"
@@ -33,7 +44,7 @@
                    />
             <div id="link-data">
                 <div class="link-data-rows">
-                    Deep Link Data:
+                    Deep Link Data
                     <div class="link-data-rows-hook"></div>
                 </div>
                 <div class="add-more-data">
@@ -52,16 +63,20 @@
 	window.extensionBridge.register({
 		init: function(info) {
 			if (info.settings && info.settings.autoOpenLink) {
-                linkCreator.restoreData(info.settings.autoOpenLink);
+                linkCreator.restoreLinkData(info.settings.autoOpenLink);
 			}
+		  if (info.settings && info.settings.autoOpenOptions) {
+			  linkCreator.restoreOptions(info.settings.autoOpenOptions);
+		  }
 		},
 		getSettings: function() {
 			return {
-			    autoOpenLink: linkCreator.getData()
+			    autoOpenLink: linkCreator.getLinkTemplate(),
+                autoOpenOptions: linkCreator.getOptions()
 			}
 		},
 		validate: function() {
-			return linkCreator.isLinkDataValidJSON(linkCreator.getData());
+			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate());
         }
     });
 </script>
