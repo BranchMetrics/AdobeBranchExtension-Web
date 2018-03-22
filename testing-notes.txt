@@ -1,0 +1,22 @@
+In order to test with container.js, please add the following to extension.json:
+
+"events": [
+    {
+      "displayName": "Dom Ready",
+      "name": "domready",
+      "libPath": "src/lib/events/domReady.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+
+Then create the following file in src/lib/events:
+
+ name: domReady.js
+ content:
+ module.exports = function(settings, trigger) {
+    window.onload = trigger;
+ };
