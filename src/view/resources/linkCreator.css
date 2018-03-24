@@ -1,7 +1,7 @@
 .link-creator-outer-shell {
     width: 520px;
     margin: 5% auto;
-    box-shadow: 0 2px 14px 0 rgba(0,0,0,0.22);
+    box-shadow: 0 0 18px 0 #CFD2DE;
     border-radius: 5px;
     background-color: #FFFFFF;
     padding: 25px;
@@ -17,27 +17,31 @@
     height: 30px;
     background: transparent;
     border-color: 1px;
-    margin-left: 35%;
-    margin-right: 35%;
-    border: 2px black solid;
+    margin-left: auto;
+    border: 2px #748292 dashed;
+    font-size: 14px;
+    font-family: Source Sans Pro,sans-serif;
+    font-weight: 400;
+    color: #06122F;
 }
 
-.link-data-row {
+.link-data-rows {
     padding-top: 0px;
+    font-size: 14px;
 }
 
 .link-data-rows-hook {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .link-data-input {
     width:230px;
     height: 30px;
     padding-left: 22px;
-    font-size: 17px;
-    border: 1px #B5C0CD solid;
+    font-size: 14px;
+    border: 1px #93A5BA solid;
     border-radius: 2.3px;
-    background: #F9FAFB;
+    background: #FFFFFF;
     margin-bottom: 10px;
 }
 
@@ -57,11 +61,10 @@
 }
 
 .link-creator-options {
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin: 10px 0px 10px 0px;
 }
 
 .link-creator-option-label {
-    font-size: 10px;
+    font-size: 14px;
+    font-weight: 300;
 }
-

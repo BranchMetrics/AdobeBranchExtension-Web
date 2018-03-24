@@ -1,4 +1,4 @@
-a {  color: #007EA8;  }
+a {  color: #1cadce;  }
 
 .configuration-outer-shell {
     width: 520px;
@@ -23,12 +23,13 @@ a {  color: #007EA8;  }
     padding-left: 20px;
     font-family: 'Source Sans Pro Regular', sans-serif;
     background-color: #FFFFFF;
+    font-size: 14px;
 }
 
 label {
     display:block;
-    font-size: 16px;
-    padding-bottom: 8px;
+    font-size: 14px;
+    padding-bottom: 5px;
     color: #06122F;
     font-family: 'Source Sans Pro Semi-Bold', sans-serif;
 }
@@ -38,10 +39,10 @@ label {
     height: 40px;
     padding-left: 22px;
     font-size: 17px;
-    border: 1px #B5C0CD solid;
+    border: 1px #93A5BA solid;
     border-radius: 2.3px;
-    background: #F9FAFB;
-    margin-bottom: 10px;
+    background: #FFFFFF;
+    margin-bottom: 20px;
 }
 
 .error {
@@ -72,6 +73,7 @@ label {
     font-size: 13px;
     color: #748292;
     top: 45px;
+    font-family: Source Sans Pro,sans-serif;
 }
 
 .gear-graphic {
@@ -99,6 +101,3 @@ label {
     font-weight: 300;
     color: #3b3e49;
 }
-
-
-
