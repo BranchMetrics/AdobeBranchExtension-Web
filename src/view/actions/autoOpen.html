@@ -14,13 +14,6 @@
             <div class="branch-form-description">
                 Define <a href="https://docs.branch.io/pages/links/integrate/" target="_blank">the data</a> that you would like to receive once your app is automatically launched on a user's device.
             </div>
-            Options
-            <div class="link-creator-options">
-                <label class="link-creator-option-label">
-                    <input type="checkbox" name="checkbox" id="makeNewLink">
-                    make_new_link - force creation of a new link even if one already exists
-                </label>
-            </div>
             <label for="channel">Channel</label>
             <input type="text"
                    id="channel"
@@ -65,14 +58,10 @@
 			if (info.settings && info.settings.autoOpenLink) {
                 linkCreator.restoreLinkData(info.settings.autoOpenLink);
 			}
-		  if (info.settings && info.settings.autoOpenOptions) {
-			  linkCreator.restoreOptions(info.settings.autoOpenOptions);
-		  }
 		},
 		getSettings: function() {
 			return {
-			    autoOpenLink: linkCreator.getLinkTemplate(),
-                autoOpenOptions: linkCreator.getOptions()
+			    autoOpenLink: linkCreator.getLinkTemplate()
 			}
 		},
 		validate: function() {
