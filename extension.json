@@ -1,5 +1,5 @@
 {
-  "displayName": "Branch Deeplinking",
+  "displayName": "Branch Deep Linking",
   "name": "branch-mobile-growth",
   "version": "1.0.0",
   "description": "Powerful links and solutions that help you acquire, engage, and measure across all devices, channels, and platforms.",
@@ -16,13 +16,13 @@
       "$schema": "http://json-schema.org/draft-04/schema#",
       "type": "object",
       "properties": {
-        "branchkey": {
+        "branchKey": {
           "type": "string",
           "minLength": 41
         }
       },
       "required": [
-        "branchkey"
+        "branchKey"
       ],
       "additionalProperties": false
     }
@@ -37,6 +37,17 @@
         "type": "object",
         "properties": {}
       }
+    },
+    {
+      "displayName": "Auto Open Your App",
+      "name": "autoopenapp",
+      "libPath": "src/lib/actions/autoOpen.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/autoOpen.html"
     }
   ]
 }

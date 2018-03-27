@@ -1,0 +1,70 @@
+.link-creator-outer-shell {
+    width: 520px;
+    margin: 5% auto;
+    box-shadow: 0 0 18px 0 #CFD2DE;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding: 25px;
+}
+
+.add-more-data {
+    margin-top: 10px;
+}
+
+.add-more-data-button {
+    padding: 2px 16px;
+    width: 30%;
+    height: 30px;
+    background: transparent;
+    border-color: 1px;
+    margin-left: auto;
+    border: 2px #748292 dashed;
+    font-size: 14px;
+    font-family: Source Sans Pro,sans-serif;
+    font-weight: 400;
+    color: #06122F;
+}
+
+.link-data-rows {
+    padding-top: 0px;
+    font-size: 14px;
+}
+
+.link-data-rows-hook {
+    margin-top: 10px;
+}
+
+.link-data-input {
+    width:230px;
+    height: 30px;
+    padding-left: 22px;
+    font-size: 14px;
+    border: 1px #93A5BA solid;
+    border-radius: 2.3px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.link-data-semi-colon-span {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.link-data-delete {
+    color: #e37978;
+    vertical-align: middle;
+}
+
+.link-data-delete-icon {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.link-creator-options {
+    margin: 10px 0px 10px 0px;
+}
+
+.link-creator-option-label {
+    font-size: 14px;
+    font-weight: 300;
+}
