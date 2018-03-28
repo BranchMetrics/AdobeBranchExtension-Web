@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>Send An SMS When App Not Installed</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../resources/branch.css">
+    <link rel="stylesheet" type="text/css" href="../resources/linkCreator.css">
+</head>
+<body>
+<div class="link-creator-outer-shell">
+    <div class="branch-icon"></div>
+    <div class="branch-form">
+        <div class="branch-form-title">SMS Users A Link To Download Your App</div>
+        <div class="branch-form-description">
+            Define <a href="https://do2cs.branch.io/pages/links/integrate/" target="_blank">the link data</a> that will be SMSed to users when Branch detects that your app is not installed on their devices.
+        </div>
+        <label for="phoneNumber">Phone Number Data Element (required)</label>
+        <input type="text"
+               id="phoneNumber"
+               spellcheck="false"
+               class="branch-form-input"
+               placeholder="eg. %phonenumber%"
+        />
+        <label for="channel">Channel</label>
+        <input type="text"
+               id="channel"
+               spellcheck="false"
+               class="branch-form-input"
+               placeholder="eg. Facebook"
+        />
+        <label for="campaign">Campaign</label>
+        <input type="text"
+               id="campaign"
+               spellcheck="false"
+               class="branch-form-input"
+               placeholder="eg. Weekly Deals"
+        />
+        <label for="tags">Tags</label>
+        <input type="text"
+               id="tags"
+               spellcheck="false"
+               class="branch-form-input"
+               placeholder="eg. 03-19-2018, sneakers"
+        />
+        <div id="link-data">
+            <div class="link-data-rows">
+                Deep Link Data
+                <div class="link-data-rows-hook"></div>
+            </div>
+            <div class="add-more-data">
+                <button class="add-more-data-button" onclick="linkCreator.addRow()">+ More Data</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="footer-text">Questions? We are here to <a href="https://support.branch.io/support/tickets/new" target="_blank">help</a></span>
+        <div class="gear-graphic"></div>
+    </div>
+</div>
+<script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+<script src="../resources/linkCreator.js"></script>
+<script>
+	window.extensionBridge.register({
+		init: function(info) {
+			if (info.settings) {
+                if (info.settings.smsLink) {
+                    linkCreator.restoreLinkData(info.settings.smsLink);
+                }
+                if (info.settings.smsPhoneNumber) {
+			        document.getElementById("phoneNumber").value = info.settings.smsPhoneNumber;
+                }
+			}
+		},
+		getSettings: function() {
+			return {
+				smsLink: linkCreator.getLinkTemplate(),
+			    smsPhoneNumber: document.getElementById("phoneNumber").value
+			}
+		},
+		validate: function() {
+			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate()) &&
+                  document.getElementById("phoneNumber").value !== "";
+		}
+	});
+</script>
+</body>
+</html>

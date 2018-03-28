@@ -5,6 +5,7 @@ module.exports = {
 			events: [
 				{
 					modulePath: 'branch-mobile-growth/src/lib/events/domReady.js',
+					settings: {}
 				}
 			],
 			actions: [
@@ -23,9 +24,10 @@ module.exports = {
 			],
 			actions: [
 				{
-					modulePath: 'branch-mobile-growth/src/lib/actions/autoOpen.js',
+					modulePath: 'branch-mobile-growth/src/lib/actions/sendSMS.js',
 					settings: {
-						"autoOpenLink": {
+						"smsPhoneNumber": "<insert number here>",
+						"smsLink": {
 							"tags": [
 								"a",
 								"b",
@@ -38,9 +40,6 @@ module.exports = {
 								"key2": "val2",
 								"key3": "val3"
 							}
-						},
-						"autoOpenOptions": {
-							"make_new_link": true
 						}
 					}
 				}

@@ -48,6 +48,17 @@
         "properties": {}
       },
       "viewPath": "actions/autoOpen.html"
+    },
+    {
+      "displayName": "Send SMS When App Not Installed",
+      "name": "sendsms",
+      "libPath": "src/lib/actions/sendSMS.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/sendSMS.html"
     }
   ]
 }
