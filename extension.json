@@ -39,7 +39,7 @@
       }
     },
     {
-      "displayName": "Auto Open Your App",
+      "displayName": "Auto-Open Native App",
       "name": "autoopenapp",
       "libPath": "src/lib/actions/autoOpen.js",
       "schema": {
@@ -50,7 +50,7 @@
       "viewPath": "actions/autoOpen.html"
     },
     {
-      "displayName": "Send SMS When App Not Installed",
+      "displayName": "SMS Link to Download App",
       "name": "sendsms",
       "libPath": "src/lib/actions/sendSMS.js",
       "schema": {
