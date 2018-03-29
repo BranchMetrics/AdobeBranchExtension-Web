@@ -85,8 +85,8 @@ linkCreator.getLinkTemplate = function() {
 
 	var link = {};
 	link = linkCreator.addPropertyIfNotNull(link, "tags", tags);
-	link = linkCreator.addPropertyIfNotNull(link, "channel", linkCreator.getElementId("channel").value);
-	link = linkCreator.addPropertyIfNotNull(link, "campaign", linkCreator.getElementId("campaign").value);
+	link = linkCreator.addPropertyIfNotNull(link, "channel", linkCreator.getElementId("channel").value.trim());
+	link = linkCreator.addPropertyIfNotNull(link, "campaign", linkCreator.getElementId("campaign").value.trim());
 	link.data = {};
 	var formLinkData = document.querySelectorAll(".link-data-row");
 	var blackListedKeysPattern = linkCreator.blackListedLinkKeysPattern();
