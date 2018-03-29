@@ -8,7 +8,7 @@ var loadScript = require('@adobe/reactor-load-script');
 		while (i < funcs.length) {
 			createCallback(branchSdk, funcs[i++]);
 		}
-		loadScript('https://cdn.branch.io/build.min.js');
+		loadScript('http://cdn.branch.io/branch-latest.min.js');
 		root[branchStr] = branchSdk;
 	}
 })(

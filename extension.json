@@ -39,7 +39,7 @@
       }
     },
     {
-      "displayName": "Auto Open Your App",
+      "displayName": "Auto-Open Native App",
       "name": "autoopenapp",
       "libPath": "src/lib/actions/autoOpen.js",
       "schema": {
@@ -48,6 +48,17 @@
         "properties": {}
       },
       "viewPath": "actions/autoOpen.html"
+    },
+    {
+      "displayName": "SMS Link to Download App",
+      "name": "sendsms",
+      "libPath": "src/lib/actions/sendSMS.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/sendSMS.html"
     }
   ]
 }
