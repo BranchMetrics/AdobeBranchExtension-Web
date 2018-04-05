@@ -59,6 +59,17 @@
         "properties": {}
       },
       "viewPath": "actions/sendSMS.html"
+    },
+    {
+      "displayName": "Track an Event with Supporting Metadata",
+      "name": "logevent",
+      "libPath": "src/lib/actions/logEvent.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/logEvent.html"
     }
   ]
 }

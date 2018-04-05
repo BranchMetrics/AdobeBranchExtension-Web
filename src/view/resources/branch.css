@@ -1,5 +1,4 @@
 a {  color: #1cadce;  }
-
 .configuration-outer-shell {
     width: 520px;
     height: 275px;
@@ -9,7 +8,6 @@ a {  color: #1cadce;  }
     background-color: #FFFFFF;
     padding: 25px;
 }
-
 .branch-icon {
     height: 39px;
     width: 106px;
@@ -18,14 +16,12 @@ a {  color: #1cadce;  }
     background-repeat: no-repeat;
     padding-bottom: 50px;
 }
-
 .branch-form {
     padding-left: 20px;
     font-family: 'Source Sans Pro Regular', sans-serif;
     background-color: #FFFFFF;
     font-size: 14px;
 }
-
 label {
     display:block;
     font-size: 14px;
@@ -33,7 +29,6 @@ label {
     color: #06122F;
     font-family: 'Source Sans Pro Semi-Bold', sans-serif;
 }
-
 .branch-form-input {
     width: 490px;
     height: 40px;
@@ -44,14 +39,18 @@ label {
     background: #FFFFFF;
     margin-bottom: 20px;
 }
-
+.branch-from-input-error {
+    border: 3px red solid;
+}
+.branch-from-input-error-text {
+    color: red;
+}
 .error {
     margin-top: 0px;
     font-size: 13px;
     color: #E37978;
     margin-top: 6px;
 }
-
 .error:before {
     width: 20px;
     height: 20px;
@@ -60,13 +59,11 @@ label {
     background: url("error.svg") no-repeat;
     float: left;
 }
-
 .footer {
     margin-top: 29px;
     height: 75px;
     position: relative;
 }
-
 .footer-text {
     position: absolute;
     margin: 0px 0px 0px 6px;
@@ -75,25 +72,21 @@ label {
     top: 45px;
     font-family: Source Sans Pro,sans-serif;
 }
-
 .gear-graphic {
     background: url("gear.svg") no-repeat;
     width: 100px;
     height: 100px;
     float: right;
 }
-
 #branch-key-error {
     visibility: hidden;
 }
-
 .branch-form-title {
     font-weight: 600;
     font-size: 16px;
     margin: 10px 10px 10px 0;
     font-family: Source Sans Pro,sans-serif;
 }
-
 .branch-form-description {
     margin: 6px 0 20px 0;
     font-size: 15px;

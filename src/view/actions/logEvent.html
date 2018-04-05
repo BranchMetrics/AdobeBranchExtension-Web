@@ -1,43 +1,27 @@
 <html>
 <head>
-	<title>Auto Open Your App</title>
+	<title>Track an Event with Supporting Metadata</title>
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../resources/branch.css">
 	<link rel="stylesheet" type="text/css" href="../resources/linkCreator.css">
+	<script src="../resources/linkCreator.js"></script>
 </head>
 <body>
 <div class="link-creator-outer-shell">
 		<div class="branch-icon"></div>
 		<div class="branch-form">
-			<div class="branch-form-title">Automatically Launch and Deep Link Users To Content in Your App</div>
+			<div class="branch-form-title">Track an Event with Supporting Metadata</div>
 			<div class="branch-form-description">
-				Branch can detect when your user has the app installed when they're visiting your mobile website. Define <a href="https://docs.branch.io/pages/links/integrate/" target="_blank">the data</a> that you would like your app to receive once it is automatically launched.
+				Define an event that you would like to track below
 			</div>
-			<label for="channel">Channel</label>
-			<input type="text"
-				   id="channel"
-				   spellcheck="false"
-				   class="branch-form-input"
-				   placeholder="eg. Facebook"
-				   />
-			<label for="campaign">Campaign</label>
-			<input type="text"
-				   id="campaign"
-				   spellcheck="false"
-				   class="branch-form-input"
-				   placeholder="eg. Weekly Deals"
-				   />
-			<label for="tags">Tags</label>
-			<input type="text"
-				   id="tags"
-				   spellcheck="false"
-				   class="branch-form-input"
-				   placeholder="eg. 03-19-2018, sneakers"
-				   />
+			<div class="log-event-chooser-hook">
+			</div>
+			<div class="log-event-data-hook">
+			</div>
 			<div id="link-data">
 				<div class="link-data-rows">
-					Deep Link Data
+					Custom Data
 					<div class="link-data-rows-hook"></div>
 				</div>
 				<div class="add-more-data">
@@ -51,21 +35,37 @@
 		</div>
 </div>
 <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
-<script src="../resources/linkCreator.js"></script>
 <script>
+	window.onload = function() {
+		linkCreator.renderV2EventDropDown();
+		linkCreator.renderFieldsForV2Event();
+	};
 	window.extensionBridge.register({
 		init: function(info) {
-			if (info.settings && info.settings.autoOpenLink) {
-				linkCreator.restoreLinkData(info.settings.autoOpenLink);
+			if (info.settings && info.settings.v2EventName) {
+				linkCreator.restoreV2EventName(info.settings.v2EventName);
+			}
+			if (info.settings && info.settings.v2EventData) {
+			  linkCreator.restoreV2EventData(info.settings.v2EventData);
+			}
+			else {
+				linkCreator.restoreV2EventData();
+			}
+			if (info.settings && info.settings.customData) {
+			  linkCreator.restoreCustomData(info.settings.customData);
 			}
 		},
 		getSettings: function() {
 			return {
-				autoOpenLink: linkCreator.getLinkTemplate()
+				v2EventName: linkCreator.getV2EventName(),
+				v2EventData: linkCreator.getV2EventData(),
+				customData: linkCreator.getCustomData()
 			}
 		},
 		validate: function() {
-			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate());
+			return linkCreator.isLinkDataValidJSON(linkCreator.getCustomData()) &&
+				   linkCreator.isLinkDataValidJSON(linkCreator.getV2EventData()) &&
+				   linkCreator.validateV2EventData();
 		}
 	});
 </script>

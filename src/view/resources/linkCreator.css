@@ -6,11 +6,9 @@
     background-color: #FFFFFF;
     padding: 25px;
 }
-
 .add-more-data {
     margin-top: 10px;
 }
-
 .add-more-data-button {
     padding: 2px 16px;
     width: 30%;
@@ -24,7 +22,6 @@
     font-weight: 400;
     color: #06122F;
 }
-
 .link-data-rows {
     padding-top: 0px;
     font-size: 14px;
@@ -33,7 +30,6 @@
 .link-data-rows-hook {
     margin-top: 10px;
 }
-
 .link-data-input {
     width:230px;
     height: 30px;
@@ -44,27 +40,28 @@
     background: #FFFFFF;
     margin-bottom: 10px;
 }
-
 .link-data-semi-colon-span {
     padding-left: 4px;
     padding-right: 4px;
 }
-
 .link-data-delete {
     color: #e37978;
     vertical-align: middle;
 }
-
 .link-data-delete-icon {
     font-size: 18px;
     margin-left: 5px;
 }
-
 .link-creator-options {
     margin: 10px 0px 10px 0px;
 }
-
 .link-creator-option-label {
     font-size: 14px;
     font-weight: 300;
+}
+#log-event-chooser {
+    width: 245px;
+    height: 40px;
+    margin-bottom: 20px;
+    background-color: white;
 }
