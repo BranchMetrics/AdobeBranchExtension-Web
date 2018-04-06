@@ -130,8 +130,6 @@ linkCreator.isPhoneNumberFieldNotEmpty = function() {
 	var phoneNumberField = linkCreator.getElementId("phoneNumber");
 	var phoneNumberValue = phoneNumberField.value.trim();
 	var phoneNumberLabel = document.querySelectorAll("[for='phoneNumber']")[0];
-	console.log(phoneNumberValue);
-	console.log(phoneNumberLabel);
 	if (phoneNumberValue === "") {
 		phoneNumberField.className = 'branch-form-input branch-form-input-error';
 		phoneNumberLabel.innerHTML = 'Phone Number Data Element' + ' -- ' + 'is required';
