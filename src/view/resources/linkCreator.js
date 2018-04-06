@@ -132,7 +132,7 @@ linkCreator.getV2EventNames = function() {
 		commerce: ["ADD_TO_CART", "ADD_TO_WISHLIST", "VIEW_CART", "INITIATE_PURCHASE", "ADD_PAYMENT_INFO", "PURCHASE", "SPEND_CREDITS"],
 		content: ["SEARCH", "VIEW_ITEM", "VIEW_ITEMS", "RATE", "SHARE"],
 		user_lifecycle: ["COMPLETE_REGISTRATION", "COMPLETE_TUTORIAL", "ACHIEVE_LEVEL", "UNLOCK_ACHIEVEMENT"],
-		custom: ["CUSTOM EVENT"]
+		custom: ["CUSTOM_EVENT"]
 	}
 };
 linkCreator.getFieldsForV2EventCategory = function(eventType) {
@@ -181,14 +181,14 @@ linkCreator.renderV2EventDropDown = function() {
 	}
 	linkCreator.append(chooserDiv, select);
 };
-linkCreator.isNumber = function(value) {
-	return /^\d*\.?\d+$/.test(value);
-};
-linkCreator.isValidCurrency = function(value) {
+linkCreator.isValidCurrencyCode = function(value) {
 	var currencies = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 'BYN', 'BZD', 'CAD', 'CDF', 'CHF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRU', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SEK', 'SGD', 'SHP', 'SLL', 'SOS', 'SPL', 'SRD', 'STN', 'SVC', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 'TOP', 'TRY', 'TTD', 'TVD', 'TWD', 'TZS', 'UAH', 'UGX', 'USD', 'UYU', 'UZS', 'VEF', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW', 'ZWD'];
 	return currencies.indexOf(value) > -1;
 }
 linkCreator.getV2EventName = function() {
+	if (linkCreator.getV2EventCategory() === "custom") {
+		return linkCreator.getElementId("event_name").value;
+	}
 	var chooser = document.getElementById("log-event-chooser");
 	return chooser.options[chooser.selectedIndex].value;
 };
@@ -220,15 +220,18 @@ linkCreator.renderFieldsForV2Event = function(eventData) {
 linkCreator.getV2EventData = function() {
 	var logEventData = document.querySelectorAll("[data-row-type^=event-data-row]");
 	var eventData = {};
+	if (linkCreator.getV2EventCategory() === "custom") {
+		return eventData; // we don't want to add the custom event name to event data
+	}
 	if (logEventData.length > 0) {
 		for (var index = 0; index < logEventData.length; index++) {
 			var userInput = logEventData[index].value;
 			var fieldName = logEventData[index].id;
 			var dataType = logEventData[index].dataset.type;
-			if (userInput && dataType === "double" && linkCreator.isNumber(userInput)) {
-				eventData[fieldName] = userInput;
+			if (userInput && dataType === "double" && !isNaN(userInput)) {
+				eventData[fieldName] = Number(userInput);
 			}
-			else if (userInput && dataType === "currency_code" && linkCreator.isValidCurrency(userInput)) {
+			else if (userInput && dataType === "currency_code" && linkCreator.isValidCurrencyCode(userInput)) {
 				eventData[fieldName] = userInput;
 			}
 			else if (userInput && dataType === "string") {
@@ -239,23 +242,28 @@ linkCreator.getV2EventData = function() {
 	return eventData;
 };
 linkCreator.validateV2EventData = function() {
+	var assignErrorClassAndMessage = function(element, fieldName, message) {
+		element.className = "branch-form-input branch-from-input-error";
+		element.previousSibling.innerHTML = fieldName.replace('_', ' ') + ' -- ' + message;
+		element.previousSibling.className = "branch-from-input-error-text";
+	};
 	var logEventData = document.querySelectorAll("[data-row-type^=event-data-row]");
 	var noErrors = true;
 	if (logEventData.length > 0) {
 		for (var index = 0; index < logEventData.length; index++) {
-			var userInputForField = logEventData[index].value;
+			var userInput = logEventData[index].value;
 			var fieldName = logEventData[index].id;
 			var dataType = logEventData[index].dataset.type;
-			if (userInputForField && dataType === "double" && !linkCreator.isNumber(userInputForField)) {
-				logEventData[index].className = "branch-form-input branch-from-input-error";
-				logEventData[index].previousSibling.innerHTML = fieldName + " -- should be a number";
-				logEventData[index].previousSibling.className = "branch-from-input-error-text";
+			if (userInput && dataType === "double" && isNaN(userInput)) {
+				assignErrorClassAndMessage(logEventData[index], fieldName, "should be a number");
 				noErrors = false;
 			}
-			else if (userInputForField && dataType === "currency_code" && !linkCreator.isValidCurrency(userInputForField)) {
-				logEventData[index].className = "branch-form-input branch-from-input-error";
-				logEventData[index].previousSibling.innerHTML = fieldName + ' -- should be a valid 3 character <a href="https://www.xe.com/iso4217.php" target="_blank"> ISO-4217 currency code </a>';
-				logEventData[index].previousSibling.className = "branch-from-input-error-text";
+			else if (userInput && dataType === "currency_code" && !linkCreator.isValidCurrencyCode(userInput)) {
+				assignErrorClassAndMessage(logEventData[index], fieldName, 'should be a valid 3 character <a href="https://www.xe.com/iso4217.php" target="_blank"> ISO-4217 currency code </a>');
+				noErrors = false;
+			}
+			else if (linkCreator.getV2EventCategory() === "custom" && userInput === "") {
+				assignErrorClassAndMessage(logEventData[index], fieldName, 'is required');
 				noErrors = false;
 			}
 			else {
@@ -268,13 +276,18 @@ linkCreator.validateV2EventData = function() {
 	return noErrors;
 };
 /* v2 event restoration functions */
-linkCreator.restoreV2EventName = function(eventName) {
+linkCreator.restoreV2EventName = function(eventName, category) {
 	if (!eventName) {
 		return;
 	}
 	var chooser = document.getElementById("log-event-chooser");
 	if (chooser) {
-		chooser.value = eventName;
+		if (category === "custom") {
+			chooser.value = "CUSTOM_EVENT";
+		}
+		else {
+			chooser.value = eventName;
+		}
 	}
 };
 linkCreator.restoreV2EventData = function(eventData) {

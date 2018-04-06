@@ -42,11 +42,17 @@
 	};
 	window.extensionBridge.register({
 		init: function(info) {
-			if (info.settings && info.settings.v2EventName) {
-				linkCreator.restoreV2EventName(info.settings.v2EventName);
+			if (info.settings && info.settings.v2EventName && info.settings.v2EventCategory) {
+				linkCreator.restoreV2EventName(info.settings.v2EventName, info.settings.v2EventCategory);
 			}
-			if (info.settings && info.settings.v2EventData) {
+			if (info.settings && info.settings.v2EventData && info.settings.v2EventCategory !== "custom") {
 			  linkCreator.restoreV2EventData(info.settings.v2EventData);
+			}
+			else if (info.settings &&
+				  info.settings.v2EventData &&
+				  info.settings.v2EventCategory === "custom" &&
+				  info.settings.v2EventName) { // special case for custom v2 event
+				linkCreator.restoreV2EventData({ event_name: info.settings.v2EventName });
 			}
 			else {
 				linkCreator.restoreV2EventData();
@@ -58,6 +64,7 @@
 		getSettings: function() {
 			return {
 				v2EventName: linkCreator.getV2EventName(),
+				v2EventCategory: linkCreator.getV2EventCategory(),
 				v2EventData: linkCreator.getV2EventData(),
 				customData: linkCreator.getCustomData()
 			}

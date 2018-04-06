@@ -61,7 +61,7 @@
       "viewPath": "actions/sendSMS.html"
     },
     {
-      "displayName": "Track an Event with Supporting Metadata",
+      "displayName": "Track an Event",
       "name": "logevent",
       "libPath": "src/lib/actions/logEvent.js",
       "schema": {
