@@ -12,9 +12,9 @@
 	<div class="branch-form">
 		<div class="branch-form-title">Send Users an SMS to Download Your App</div>
 		<div class="branch-form-description">
-			Define <a href="https://docs.branch.io/pages/links/integrate/" target="_blank">the data</a> that will pass through when users open your App.
+			When users don't have your app Branch can send an SMS to download the app. Build a consistent experience from Web-to-App. Define <a href="https://docs.branch.io/pages/links/integrate/#configure-deep-links" target="_blank">the data</a> that will pass through when users open your App.
 		</div>
-		<label for="phoneNumber">Phone Number Data Element (required)</label>
+		<label for="phoneNumber">Phone Number Data Element</label>
 		<input type="text"
 			   id="phoneNumber"
 			   spellcheck="false"
@@ -79,7 +79,7 @@
 		},
 		validate: function() {
 			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate()) &&
-				  document.getElementById("phoneNumber").value !== "";
+				  linkCreator.isPhoneNumberFieldNotEmpty();
 		}
 	});
 </script>

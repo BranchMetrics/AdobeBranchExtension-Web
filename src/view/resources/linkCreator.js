@@ -125,7 +125,24 @@ linkCreator.isLinkDataValidJSON = function(linkData) {
 		return false;
 	}
 };
-
+// make sure that phone number field has a value in it
+linkCreator.isPhoneNumberFieldNotEmpty = function() {
+	var phoneNumberField = linkCreator.getElementId("phoneNumber");
+	var phoneNumberValue = phoneNumberField.value.trim();
+	var phoneNumberLabel = document.querySelectorAll("[for='phoneNumber']")[0];
+	console.log(phoneNumberValue);
+	console.log(phoneNumberLabel);
+	if (phoneNumberValue === "") {
+		phoneNumberField.className = 'branch-form-input branch-form-input-error';
+		phoneNumberLabel.innerHTML = 'Phone Number Data Element' + ' -- ' + 'is required';
+		phoneNumberLabel.className = 'branch-form-input-error-text';
+		return false;
+	}
+	phoneNumberField.className = 'branch-form-input';
+	phoneNumberLabel.className = '';
+	phoneNumberLabel.innerHTML = 'Phone Number Data Element';
+	return true;
+};
 /* log event functions */
 linkCreator.getV2EventNames = function() {
 	return {
@@ -189,11 +206,11 @@ linkCreator.getV2EventName = function() {
 	if (linkCreator.getV2EventCategory() === "custom") {
 		return linkCreator.getElementId("event_name").value;
 	}
-	var chooser = document.getElementById("log-event-chooser");
+	var chooser = linkCreator.getElementId("log-event-chooser");
 	return chooser.options[chooser.selectedIndex].value;
 };
 linkCreator.getV2EventCategory = function() {
-	var chooser = document.getElementById("log-event-chooser");
+	var chooser = linkCreator.getElementId("log-event-chooser");
 	return chooser.options[chooser.selectedIndex].dataset.type;
 };
 linkCreator.renderFieldsForV2Event = function(eventData) {
@@ -243,9 +260,9 @@ linkCreator.getV2EventData = function() {
 };
 linkCreator.validateV2EventData = function() {
 	var assignErrorClassAndMessage = function(element, fieldName, message) {
-		element.className = "branch-form-input branch-from-input-error";
+		element.className = "branch-form-input branch-form-input-error";
 		element.previousSibling.innerHTML = fieldName.replace('_', ' ') + ' -- ' + message;
-		element.previousSibling.className = "branch-from-input-error-text";
+		element.previousSibling.className = "branch-form-input-error-text";
 	};
 	var logEventData = document.querySelectorAll("[data-row-type^=event-data-row]");
 	var noErrors = true;
@@ -280,7 +297,7 @@ linkCreator.restoreV2EventName = function(eventName, category) {
 	if (!eventName) {
 		return;
 	}
-	var chooser = document.getElementById("log-event-chooser");
+	var chooser = linkCreator.getElementId("log-event-chooser");
 	if (chooser) {
 		if (category === "custom") {
 			chooser.value = "CUSTOM_EVENT";

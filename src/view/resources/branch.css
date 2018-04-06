@@ -39,10 +39,10 @@ label {
     background: #FFFFFF;
     margin-bottom: 20px;
 }
-.branch-from-input-error {
+.branch-form-input-error {
     border: 3px red solid;
 }
-.branch-from-input-error-text {
+.branch-form-input-error-text {
     color: red;
 }
 .error {
