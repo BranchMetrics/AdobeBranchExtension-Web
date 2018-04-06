@@ -234,6 +234,9 @@ linkCreator.renderFieldsForV2Event = function(eventData) {
 		linkCreator.append(eventDataDiv, input);
 	}
 };
+linkCreator.isDataElement = function(userInput) {
+	return /%.*%/g.test(userInput);
+}
 linkCreator.getV2EventData = function() {
 	var logEventData = document.querySelectorAll("[data-row-type^=event-data-row]");
 	var eventData = {};
@@ -251,7 +254,7 @@ linkCreator.getV2EventData = function() {
 			else if (userInput && dataType === "currency_code" && linkCreator.isValidCurrencyCode(userInput)) {
 				eventData[fieldName] = userInput;
 			}
-			else if (userInput && dataType === "string") {
+			else if (userInput && dataType === "string" || linkCreator.isDataElement(userInput)) {
 				eventData[fieldName] = userInput;
 			}
 		}
@@ -271,11 +274,11 @@ linkCreator.validateV2EventData = function() {
 			var userInput = logEventData[index].value;
 			var fieldName = logEventData[index].id;
 			var dataType = logEventData[index].dataset.type;
-			if (userInput && dataType === "double" && isNaN(userInput)) {
+			if (userInput && dataType === "double" && !linkCreator.isDataElement(userInput) && isNaN(userInput)) {
 				assignErrorClassAndMessage(logEventData[index], fieldName, "should be a number");
 				noErrors = false;
 			}
-			else if (userInput && dataType === "currency_code" && !linkCreator.isValidCurrencyCode(userInput)) {
+			else if (userInput && dataType === "currency_code" && !linkCreator.isDataElement(userInput) && !linkCreator.isValidCurrencyCode(userInput)) {
 				assignErrorClassAndMessage(logEventData[index], fieldName, 'should be a valid 3 character <a href="https://www.xe.com/iso4217.php" target="_blank"> ISO-4217 currency code </a>');
 				noErrors = false;
 			}
