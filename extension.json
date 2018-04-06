@@ -1,5 +1,5 @@
 {
-  "displayName": "Branch Deep Linking",
+  "displayName": "Branch Experiences and Measurement",
   "name": "branch-mobile-growth",
   "version": "1.0.0",
   "description": "Powerful links and solutions that help you acquire, engage, and measure across all devices, channels, and platforms.",
@@ -59,6 +59,17 @@
         "properties": {}
       },
       "viewPath": "actions/sendSMS.html"
+    },
+    {
+      "displayName": "Track an Event",
+      "name": "logevent",
+      "libPath": "src/lib/actions/logEvent.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/logEvent.html"
     }
   ]
 }

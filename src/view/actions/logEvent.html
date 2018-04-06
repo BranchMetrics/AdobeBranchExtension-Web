@@ -1,0 +1,80 @@
+<html>
+<head>
+	<title>Track an Event with Supporting Metadata</title>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../resources/branch.css">
+	<link rel="stylesheet" type="text/css" href="../resources/linkCreator.css">
+	<script src="../resources/linkCreator.js"></script>
+</head>
+<body>
+<div class="link-creator-outer-shell">
+		<div class="branch-icon"></div>
+		<div class="branch-form">
+			<div class="branch-form-title">Track an Event with Supporting Metadata</div>
+			<div class="branch-form-description">
+				Define an event that you would like to track on your website. Read <a href="https://docs.branch.io/pages/apps/v2event/#v2-event" target="_blank">this doc</a> for more information.
+			</div>
+			<div class="log-event-chooser-hook">
+			</div>
+			<div class="log-event-data-hook">
+			</div>
+			<div id="link-data">
+				<div class="link-data-rows">
+					Custom Data
+					<div class="link-data-rows-hook"></div>
+				</div>
+				<div class="add-more-data">
+					<button class="add-more-data-button" onclick="linkCreator.addCustomDataRow()">+ More Data</button>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<span class="footer-text">Questions? We are here to <a href="https://support.branch.io/support/tickets/new" target="_blank">help</a></span>
+			<div class="gear-graphic"></div>
+		</div>
+</div>
+<script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+<script>
+	window.onload = function() {
+		linkCreator.renderV2EventDropDown();
+		linkCreator.renderFieldsForV2Event();
+	};
+	window.extensionBridge.register({
+		init: function(info) {
+			if (info.settings && info.settings.v2EventName && info.settings.v2EventCategory) {
+				linkCreator.restoreV2EventName(info.settings.v2EventName, info.settings.v2EventCategory);
+			}
+			if (info.settings && info.settings.v2EventData && info.settings.v2EventCategory !== "custom") {
+			  linkCreator.restoreV2EventData(info.settings.v2EventData);
+			}
+			else if (info.settings &&
+				  info.settings.v2EventData &&
+				  info.settings.v2EventCategory === "custom" &&
+				  info.settings.v2EventName) { // special case for custom v2 event
+				linkCreator.restoreV2EventData({ event_name: info.settings.v2EventName });
+			}
+			else {
+				linkCreator.restoreV2EventData();
+			}
+			if (info.settings && info.settings.customData) {
+			  linkCreator.restoreCustomData(info.settings.customData);
+			}
+		},
+		getSettings: function() {
+			return {
+				v2EventName: linkCreator.getV2EventName(),
+				v2EventCategory: linkCreator.getV2EventCategory(),
+				v2EventData: linkCreator.getV2EventData(),
+				customData: linkCreator.getCustomData()
+			}
+		},
+		validate: function() {
+			return linkCreator.isLinkDataValidJSON(linkCreator.getCustomData()) &&
+				   linkCreator.isLinkDataValidJSON(linkCreator.getV2EventData()) &&
+				   linkCreator.validateV2EventData();
+		}
+	});
+</script>
+</body>
+</html>

@@ -24,23 +24,13 @@ module.exports = {
 			],
 			actions: [
 				{
-					modulePath: 'branch-mobile-growth/src/lib/actions/sendSMS.js',
+					modulePath: 'branch-mobile-growth/src/lib/actions/logEvent.js',
 					settings: {
-						"smsPhoneNumber": "<insert number here>",
-						"smsLink": {
-							"tags": [
-								"a",
-								"b",
-								"c",
-								"d",
-								"e"
-							],
-							"data": {
-								"key1": "val1",
-								"key2": "val2",
-								"key3": "val3"
-							}
-						}
+						"v2EventName": "ADD_TO_CART",
+						"v2EventData": {
+							"revenue": 21321312312
+						},
+						"customData": {}
 					}
 				}
 			]
@@ -62,7 +52,7 @@ module.exports = {
 		// Set up an extension configuration you would like to test. The top-level object key is the
 		// name of your extension (as defined in your extension.json).
 		'branch-mobile-growth': {
-			displayName: 'Branch Deeplinking',
+			displayName: 'Branch Experiences and Measurement',
 			settings: {
 				'branchKey': 'key_live_hkDytPACtipny3N9XmnbZlapBDdj4WIL'
                   }
