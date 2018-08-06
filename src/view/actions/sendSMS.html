@@ -3,6 +3,7 @@
 	<title>Send An SMS When App Not Installed</title>
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript" src="../resources/common.js"></script>
 	<link rel="stylesheet" type="text/css" href="../resources/branch.css">
 	<link rel="stylesheet" type="text/css" href="../resources/linkCreator.css">
 </head>
@@ -60,9 +61,14 @@
 <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
 <script src="../resources/linkCreator.js"></script>
 <script>
+	var subscriptionStatus = true;
 	window.extensionBridge.register({
 		init: function(info) {
-			if (info.settings) {
+			if (info.extensionSettings && info.extensionSettings.subscriptionStatus === false) {
+				  subscriptionStatus = false;
+				  displaySubscriptionError();
+			}
+			else if (info.settings) {
 				if (info.settings.smsLink) {
 					linkCreator.restoreLinkData(info.settings.smsLink);
 				}
@@ -72,14 +78,19 @@
 			}
 		},
 		getSettings: function() {
-			return {
-				smsLink: linkCreator.getLinkTemplate(),
-				smsPhoneNumber: document.getElementById("phoneNumber").value.trim()
-			}
+		  if (subscriptionStatus) {
+				return {
+					smsLink: linkCreator.getLinkTemplate(),
+					smsPhoneNumber: document.getElementById("phoneNumber").value.trim()
+				};
+	    	}
+		  	return {};
 		},
 		validate: function() {
-			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate()) &&
-				  linkCreator.isPhoneNumberFieldNotEmpty();
+			if (subscriptionStatus === false) {
+				return false;
+			}
+			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate()) && linkCreator.isPhoneNumberFieldNotEmpty();
 		}
 	});
 </script>
