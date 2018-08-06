@@ -1,4 +1,4 @@
-a {  color: #1cadce;  }
+a {  color: #0075C9;  }
 .configuration-outer-shell {
     width: 520px;
     height: 275px;
@@ -46,14 +46,14 @@ label {
     color: red;
 }
 .error {
-    margin-top: 0px;
-    font-size: 13px;
+    font-size: 12px;
     color: #E37978;
     margin-top: 6px;
+    height: 38.4px;
 }
 .error:before {
     width: 20px;
-    height: 20px;
+    height: 40px;
     display: block;
     content: "";
     background: url("error.svg") no-repeat;
@@ -63,6 +63,9 @@ label {
     margin-top: 29px;
     height: 75px;
     position: relative;
+}
+.footer-configuration-page {
+    margin-top: -10px;
 }
 .footer-text {
     position: absolute;
@@ -78,7 +81,11 @@ label {
     height: 100px;
     float: right;
 }
-#branch-key-error {
+.subscription-error-title {
+    text-align: center;
+    vertical-align: middle;
+}
+#error-box-configuration-page {
     visibility: hidden;
 }
 .branch-form-title {

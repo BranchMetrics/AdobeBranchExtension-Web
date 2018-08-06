@@ -1,7 +1,10 @@
 'use strict';
 module.exports = function(settings) {
 	var autoOpenLink = settings['autoOpenLink'] || null;
-	if (autoOpenLink) {
+	var extensionSettings = turbine.getExtensionSettings();
+	var subscriptionStatus = extensionSettings['subscriptionStatus'] || false;
+
+	if (subscriptionStatus && autoOpenLink) {
 		if (autoOpenLink.data && !autoOpenLink.data.$uri_redirect_mode) {
 			// set uri redirect mode to 1 if not present in link data
 			autoOpenLink.data.$uri_redirect_mode = 1;
