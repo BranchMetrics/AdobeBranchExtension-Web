@@ -5,6 +5,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../resources/branch.css">
 	<link rel="stylesheet" type="text/css" href="../resources/linkCreator.css">
+	<script type="text/javascript" src="../resources/common.js"></script>
 </head>
 <body>
 <div class="link-creator-outer-shell">
@@ -53,7 +54,7 @@
 <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
 <script src="../resources/linkCreator.js"></script>
 <script>
-	var subscriptionStatus = null;
+	var subscriptionStatus = true;
 	window.extensionBridge.register({
 		init: function(info) {
 		  	if (info.extensionSettings && info.extensionSettings.subscriptionStatus === false) {

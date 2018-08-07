@@ -15,7 +15,7 @@
     	return document.getElementById("branch-key").value;
     };
     var getErrorElement = function() {
-    	return document.getElementById("error-box-configuration-page");
+    	return document.getElementById("error-configuration-page");
     };
     var showBranchKeyLengthError = function() {
     	var errorElement = getErrorElement();
@@ -86,8 +86,7 @@
 	var validateField = function(elementId) {
 	    var element = document.getElementById(elementId);
 		if (elementId === "branch-key") {
-		  var branchKeyLengthCorrect = isBranchKeyLengthCorrect(element.value);
-		  if (branchKeyLengthCorrect) {
+		  if (isBranchKeyLengthCorrect(element.value)) {
 		  	hideError();
 		    validateSubscriptionStatus(element.value);
           }
@@ -113,7 +112,7 @@
                    spellcheck="false"
                    oninput="validateField('branch-key')"
                    required/>
-            <p id="error-box-configuration-page" class="error">Incorrect Branch Key: Please copy your Branch Key from <a href="https://dashboard.branch.io/account-settings/app" target="_blank">here</a></p>
+            <p id="error-configuration-page" class="error">Incorrect Branch Key: Please copy your Branch Key from <a href="https://dashboard.branch.io/account-settings/app" target="_blank">here</a></p>
         </form>
         <div class="footer footer-configuration-page">
             <span class="footer-text">Questions? We are here to <a href="https://support.branch.io/support/tickets/new" target="_blank">help</a></span>
