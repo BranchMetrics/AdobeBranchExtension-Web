@@ -8,9 +8,9 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@adobe/reactor-packager": "^2.6.0",
-    "@adobe/reactor-sandbox": "^8.2.1",
-    "@adobe/reactor-scaffold": "^1.1.9",
-    "@adobe/reactor-turbine": "^24.4.0"
+    "@adobe/reactor-packager": "^3.0.1 ",
+    "@adobe/reactor-sandbox": "^10.0.4",
+    "@adobe/reactor-scaffold": "^2.0.0",
+    "@adobe/reactor-turbine": "^25.1.3"
   }
 }

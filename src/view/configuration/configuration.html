@@ -4,29 +4,98 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../resources/branch.css">
     <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script type="text/javascript" src="../resources/common.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-    function branchKeyIsValid(branchKey, validateFunction) {
+    var journeysSubscriptionStatus = null;
+    var xhrRequestInProgress = false;
+
+    var getBranchKey = function() {
+    	return document.getElementById("branch-key").value;
+    };
+    var getErrorElement = function() {
+    	return document.getElementById("error-box-configuration-page");
+    };
+    var showBranchKeyLengthError = function() {
+    	var errorElement = getErrorElement();
+    	errorElement.innerHTML = errorMessages["BRANCH_KEY_ERROR"];
+    	errorElement.style.visibility = "visible";
+    };
+    var showSubscriptionError = function() {
+	    var errorElement = getErrorElement();
+	    var msg = errorMessages["SUBSCRIPTION_ERROR_DESCRIPTION"] + ' ' + errorMessages["SUBSCRIPTION_RE_SYNC"];
+	    errorElement.innerHTML = msg;
+	    errorElement.style.visibility = "visible";
+    };
+    var hideError = function() {
+	    var errorElement = getErrorElement();
+	    errorElement.style.visibility = "hidden";
+    };
+    var showSubscriptionErrorOnInit = function() {
+        if (isBranchKeyLengthCorrect(getBranchKey()) && journeysSubscriptionStatus === false) {
+        	showSubscriptionError();
+        }
+    };
+
+    var validateSubscriptionStatus = function() {
+	    var branchKey = getBranchKey();
+	    var subscriptionRequest = new Promise(function(resolve, reject) {
+		    var xhr = new XMLHttpRequest();
+		    var URL = "https://api.branch.io/v1/subscription/status?branch_key="+ branchKey +"&SKU=SKU-00000008";
+		    xhrRequestInProgress = true;
+            xhr.open("GET", URL);
+            xhr.onload = function() {
+                resolve(xhr.responseText);
+            };
+            xhr.onerror = function() {
+                reject();
+            };
+            xhr.send();
+	    });
+	    subscriptionRequest.then(function(data) {
+	    	var data = JSON.parse(data);
+            if (data === true) {
+                journeysSubscriptionStatus = true;
+                xhrRequestInProgress = false;
+                hideError();
+            } else {
+                journeysSubscriptionStatus = false;
+                xhrRequestInProgress = false;
+                showSubscriptionError();
+            }
+        }).catch(function() {
+		    journeysSubscriptionStatus = false;
+		    xhrRequestInProgress = false;
+		    showSubscriptionError();
+	    });
+    };
+
+    var isBranchKeyLengthCorrect = function(branchKey, validateFunction) {
+    	if (!branchKey) {
+    		return false;
+        }
 	    var key = branchKey.trim();
 	    var length = key.length;
-
 	    if (length === 0 && !validateFunction) {
 	    	return true;
         }
+	    return (length === 41 && (key.includes("key_live") || key.includes("key_test"))) ? true : false;
+    };
 
-	    return (length === 41
-	    && (key.includes("key_live") ||
-        key.includes("key_test"))) ? true : false;
-    }
-
-	function validateField(elementId) {
+	var validateField = function(elementId) {
 	    var element = document.getElementById(elementId);
 		if (elementId === "branch-key") {
-		  var branchKeyError = document.getElementById("branch-key-error");
-		  branchKeyIsValid(element.value) ? branchKeyError.style.visibility = "hidden" : branchKeyError.style.visibility = "visible";
+		  var branchKeyLengthCorrect = isBranchKeyLengthCorrect(element.value);
+		  if (branchKeyLengthCorrect) {
+		  	hideError();
+		    validateSubscriptionStatus(element.value);
+          }
+          else {
+		    showBranchKeyLengthError();
+          }
 		}
-	}
+	};
 </script>
 <div class="configuration-outer-shell">
     <div>
@@ -42,14 +111,11 @@
                    class="branch-form-input"
                    maxlength="41"
                    spellcheck="false"
-                   onblur="validateField('branch-key')"
-                   onfocus="validateField('branch-key')"
-                   onkeyup="validateField('branch-key')"
                    oninput="validateField('branch-key')"
                    required/>
-            <p id="branch-key-error" class="error">Incorrect Branch Key: Please copy your Branch Key from <a href="https://dashboard.branch.io/account-settings/app" target="_blank">here</a></p>
+            <p id="error-box-configuration-page" class="error">Incorrect Branch Key: Please copy your Branch Key from <a href="https://dashboard.branch.io/account-settings/app" target="_blank">here</a></p>
         </form>
-        <div class="footer">
+        <div class="footer footer-configuration-page">
             <span class="footer-text">Questions? We are here to <a href="https://support.branch.io/support/tickets/new" target="_blank">help</a></span>
             <div class="gear-graphic"></div>
         </div>
@@ -60,16 +126,19 @@
 		init: function(info) {
 			if (info.settings) {
 			    document.getElementById("branch-key").value = info.settings.branchKey || '';
+			    journeysSubscriptionStatus = info.settings.subscriptionStatus;
+			    showSubscriptionErrorOnInit();
 			}
 		},
 		getSettings: function() {
 			return {
-				branchKey: document.getElementById("branch-key").value || ''
+				branchKey: document.getElementById("branch-key").value || '',
+				subscriptionStatus: journeysSubscriptionStatus
 			}
 		},
 		validate: function() {
-			return branchKeyIsValid(document.getElementById("branch-key").value,
-                  true);
+			return isBranchKeyLengthCorrect(document.getElementById("branch-key").value,
+                  true) && !xhrRequestInProgress;
 		}
 	});
 </script>
