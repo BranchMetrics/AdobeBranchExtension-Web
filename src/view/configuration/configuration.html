@@ -40,35 +40,37 @@
 
     var validateSubscriptionStatus = function() {
 	    var branchKey = getBranchKey();
-	    var subscriptionRequest = new Promise(function(resolve, reject) {
+	    var processOnload = function(data) {
+		    var data = JSON.parse(data);
+		    if (data === true) {
+			    journeysSubscriptionStatus = true;
+			    xhrRequestInProgress = false;
+			    hideError();
+		    } else {
+			    journeysSubscriptionStatus = false;
+			    xhrRequestInProgress = false;
+			    showSubscriptionError();
+		    }
+	    };
+	    var processOnError = function() {
+		    journeysSubscriptionStatus = false;
+		    xhrRequestInProgress = false;
+		    showSubscriptionError();
+	    };
+	    var subscriptionRequest = function() {
 		    var xhr = new XMLHttpRequest();
 		    var URL = "https://api.branch.io/v1/subscription/status?branch_key="+ branchKey +"&SKU=SKU-00000008";
 		    xhrRequestInProgress = true;
             xhr.open("GET", URL);
             xhr.onload = function() {
-                resolve(xhr.responseText);
+                processOnload(xhr.responseText);
             };
             xhr.onerror = function() {
-                reject();
+                processOnError();
             };
             xhr.send();
-	    });
-	    subscriptionRequest.then(function(data) {
-	    	var data = JSON.parse(data);
-            if (data === true) {
-                journeysSubscriptionStatus = true;
-                xhrRequestInProgress = false;
-                hideError();
-            } else {
-                journeysSubscriptionStatus = false;
-                xhrRequestInProgress = false;
-                showSubscriptionError();
-            }
-        }).catch(function() {
-		    journeysSubscriptionStatus = false;
-		    xhrRequestInProgress = false;
-		    showSubscriptionError();
-	    });
+	    };
+	    subscriptionRequest();
     };
 
     var isBranchKeyLengthCorrect = function(branchKey, validateFunction) {
