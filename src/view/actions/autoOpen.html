@@ -57,7 +57,7 @@
 	var subscriptionStatus = true;
 	window.extensionBridge.register({
 		init: function(info) {
-		  	if (info.extensionSettings && info.extensionSettings.subscriptionStatus === false) {
+			if (info.extensionSettings && info.extensionSettings.subscriptionStatus === false) {
 				subscriptionStatus = false;
 				displaySubscriptionError();
 			}
@@ -75,7 +75,7 @@
 			return {};
 		},
 		validate: function() {
-		  	return subscriptionStatus === false ? false : linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate());
+			return subscriptionStatus === false ? false : linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate());
 		}
 	});
 </script>
