@@ -54,7 +54,8 @@ module.exports = {
 		'branch-mobile-growth': {
 			displayName: 'Branch Experiences and Measurement',
 			settings: {
-				'branchKey': 'key_live_hkDytPACtipny3N9XmnbZlapBDdj4WIL'
+				'branchKey': 'key_live_oftJ3F17S3vu6KVDTl93XjiltykwRU0e',
+				'subscriptionStatus': false
                   }
 		}
 	},

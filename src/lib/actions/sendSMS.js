@@ -22,11 +22,14 @@ module.exports = function(settings) {
 		}
 	}
 
+	var extensionSettings = turbine.getExtensionSettings();
+	var subscriptionStatus = extensionSettings['subscriptionStatus'] || false;
+
 	var hasApp = checkSessionStorageForHasAppValue();
 	var smsPhoneNumber = settings['smsPhoneNumber'] || null;
 	var smsLink = settings['smsLink'] || null;
 
-	if (smsPhoneNumber && smsLink && hasApp === false) {
+	if (subscriptionStatus && smsPhoneNumber && smsLink && hasApp === false) {
 		branch.sendSMS(
 			smsPhoneNumber,
 			Object.assign({}, smsLink)

@@ -1,7 +1,8 @@
 {
   "displayName": "Branch Experiences and Measurement",
   "name": "branch-mobile-growth",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "platform": "web",
   "description": "Powerful links and solutions that help you acquire, engage, and measure across all devices, channels, and platforms.",
   "iconPath": "src/view/resources/branch_logo_store.svg",
   "author": {
@@ -24,7 +25,7 @@
       "required": [
         "branchKey"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     }
   },
   "actions": [

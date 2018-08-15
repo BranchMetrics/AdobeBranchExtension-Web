@@ -5,6 +5,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../resources/branch.css">
 	<link rel="stylesheet" type="text/css" href="../resources/linkCreator.css">
+	<script type="text/javascript" src="../resources/common.js"></script>
 </head>
 <body>
 <div class="link-creator-outer-shell">
@@ -53,19 +54,28 @@
 <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
 <script src="../resources/linkCreator.js"></script>
 <script>
+	var subscriptionStatus = true;
 	window.extensionBridge.register({
 		init: function(info) {
-			if (info.settings && info.settings.autoOpenLink) {
+			if (info.extensionSettings && info.extensionSettings.subscriptionStatus === false) {
+				subscriptionStatus = false;
+				displaySubscriptionError();
+			}
+			else if (info.settings && info.settings.autoOpenLink) {
+				subscriptionStatus = true;
 				linkCreator.restoreLinkData(info.settings.autoOpenLink);
 			}
 		},
 		getSettings: function() {
-			return {
-				autoOpenLink: linkCreator.getLinkTemplate()
+			if (subscriptionStatus) {
+				return {
+					autoOpenLink: linkCreator.getLinkTemplate()
+				};
 			}
+			return {};
 		},
 		validate: function() {
-			return linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate());
+			return subscriptionStatus === false ? false : linkCreator.isLinkDataValidJSON(linkCreator.getLinkTemplate());
 		}
 	});
 </script>
