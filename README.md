@@ -27,8 +27,6 @@ To install the Branch Plugin in your Launch Property:
 
 Before using actions related to Branch, you’ll need to **initialize** the plugin on your site. Best practice is to initialize Branch on **DOM Ready**. Here’s an example that uses the Core plugin’s DOM Ready event to initialize Branch.
 
-![image](/img/pages/apps/adobe-launch-web-plugin/adobe-launch-web2.png)
-
 Note: The Branch initialization action does not have a configuration screen. When you add it to a rule, you’ll want to select the following options:
 
 **Extension**: Branch Experiences and Measurement
