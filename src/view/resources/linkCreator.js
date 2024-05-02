@@ -125,28 +125,12 @@ linkCreator.isLinkDataValidJSON = function(linkData) {
 		return false;
 	}
 };
-// make sure that phone number field has a value in it
-linkCreator.isPhoneNumberFieldNotEmpty = function() {
-	var phoneNumberField = linkCreator.getElementId("phoneNumber");
-	var phoneNumberValue = phoneNumberField.value.trim();
-	var phoneNumberLabel = document.querySelectorAll("[for='phoneNumber']")[0];
-	if (phoneNumberValue === "") {
-		phoneNumberField.className = 'branch-form-input branch-form-input-error';
-		phoneNumberLabel.innerHTML = 'Phone Number Data Element' + ' -- ' + 'is required';
-		phoneNumberLabel.className = 'branch-form-input-error-text';
-		return false;
-	}
-	phoneNumberField.className = 'branch-form-input';
-	phoneNumberLabel.className = '';
-	phoneNumberLabel.innerHTML = 'Phone Number Data Element';
-	return true;
-};
 /* log event functions */
 linkCreator.getV2EventNames = function() {
 	return {
-		commerce: ["ADD_TO_CART", "ADD_TO_WISHLIST", "VIEW_CART", "INITIATE_PURCHASE", "ADD_PAYMENT_INFO", "PURCHASE", "SPEND_CREDITS"],
-		content: ["SEARCH", "VIEW_ITEM", "VIEW_ITEMS", "RATE", "SHARE"],
-		user_lifecycle: ["COMPLETE_REGISTRATION", "COMPLETE_TUTORIAL", "ACHIEVE_LEVEL", "UNLOCK_ACHIEVEMENT"],
+		commerce: ["ADD_TO_CART", "ADD_TO_WISHLIST", "VIEW_CART", "INITIATE_PURCHASE", "ADD_PAYMENT_INFO", "CLICK_AD", "PURCHASE", "RESERVE", "SPEND_CREDITS", "VIEW_AD"],
+		content: ["SEARCH", "VIEW_ITEM", "VIEW_ITEMS", "RATE", "SHARE", "INITIATE_STREAM", "COMPLETE_STREAM"],
+		user_lifecycle: ["COMPLETE_REGISTRATION", "COMPLETE_TUTORIAL", "ACHIEVE_LEVEL", "UNLOCK_ACHIEVEMENT", "INVITE", "LOGIN", "SUBSCRIBE", "START_TRIAL"],
 		custom: ["CUSTOM_EVENT"]
 	}
 };
@@ -163,7 +147,8 @@ linkCreator.getFieldsForV2EventCategory = function(eventType) {
 			tax: "double",
 			coupon: "string",
 			affiliation: "string",
-			description: "string"
+			description: "string",
+			search_query: "string"
 		},
 		content: {
 			search_query: "string",

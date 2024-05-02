@@ -1,5 +1,4 @@
 'use strict';
-var branchBase;
 var window = require('@adobe/reactor-window');
 var loadScript = require('@adobe/reactor-load-script');
 
@@ -8,7 +7,14 @@ var loadScript = require('@adobe/reactor-load-script');
 		while (i < funcs.length) {
 			createCallback(branchSdk, funcs[i++]);
 		}
-		loadScript('https://cdn.branch.io/branch-latest.min.js');
+		loadScript('https://cdn.branch.io/branch-latest.min.js').then(
+			function () {
+			  turbine.logger.log('Branch sdk was successfully loaded.');
+			},
+			function () {
+			  turbine.logger.error('Branch sdk could not be loaded.');
+			}
+		  );
 		root[branchStr] = branchSdk;
 	}
 })(
@@ -23,33 +29,34 @@ var loadScript = require('@adobe/reactor-load-script');
 	},
 	[
 		'addListener',
-		'applyCode',
-		'autoAppIndex',
 		'banner',
 		'closeBanner',
 		'closeJourney',
-		'creditHistory',
-		'credits',
 		'data',
 		'deepview',
 		'deepviewCta',
 		'first',
-		'getCode',
 		'init',
 		'link',
 		'logout',
-		'redeem',
-		'referrals',
 		'removeListener',
-		'sendSMS',
 		'setBranchViewData',
 		'setIdentity',
 		'track',
-		'validateCode',
 		'trackCommerceEvent',
-		'logEvent'
+		'logEvent',
+		'disableTracking',
+		'getBrowserFingerprintId',
+		'crossPlatformIds',
+		'lastAttributedTouchData',
+		'setAPIResponseCallback',
+		'qrCode',
+		'setRequestMetaData',
+		'setDMAParamsForEEA',
+		'setAPIUrl',
+		'getAPIUrl'
 	],
 	0
 );
 
-module.exports = branchBase;
+module.exports = window.branch;

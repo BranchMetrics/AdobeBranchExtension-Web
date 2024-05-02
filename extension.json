@@ -20,6 +20,9 @@
         "branchKey": {
           "type": "string",
           "minLength": 41
+        },
+        "branchAPIURL": {
+          "type": "string"
         }
       },
       "required": [
@@ -49,17 +52,6 @@
         "properties": {}
       },
       "viewPath": "actions/autoOpen.html"
-    },
-    {
-      "displayName": "SMS Link to Download App",
-      "name": "sendsms",
-      "libPath": "src/lib/actions/sendSMS.js",
-      "schema": {
-        "$schema": "http://json-schema.org/draft-04/schema#",
-        "type": "object",
-        "properties": {}
-      },
-      "viewPath": "actions/sendSMS.html"
     },
     {
       "displayName": "Track an Event",
