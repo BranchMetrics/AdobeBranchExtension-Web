@@ -47,7 +47,6 @@ var loadScript = require('@adobe/reactor-load-script');
 		'logEvent',
 		'disableTracking',
 		'getBrowserFingerprintId',
-		'crossPlatformIds',
 		'lastAttributedTouchData',
 		'setAPIResponseCallback',
 		'qrCode',
